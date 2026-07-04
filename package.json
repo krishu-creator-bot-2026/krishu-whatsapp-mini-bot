@@ -1,0 +1,30 @@
+{
+  "name": "krishu-whatsapp-mini-bot",
+  "version": "2.0.0",
+  "description": "KRISHU WhatsApp Mini Bot - 500+ Commands | Multi-Device | Free 24/7 Hosting",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "baileys": "^6.7.0",
+    "qrcode": "^1.5.3",
+    "qrcode-terminal": "^0.12.0",
+    "pino": "^8.17.2",
+    "axios": "^1.6.7",
+    "ytdl-core": "^4.11.5",
+    "ytsr": "^3.8.5",
+    "ytpl": "^2.3.7",
+    "cheerio": "^1.0.0-rc.12",
+    "crypto": "^1.0.1",
+    "moment": "^2.30.1",
+    "os": "^0.1.2",
+    "speed-test": "^3.0.0",
+    "child_process": "^1.0.2",
+    "fs-extra": "^11.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
