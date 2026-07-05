@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRISHU BOT - BEST MINI BOT</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a1a; color: #e0e0e0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { max-width: 800px; width: 100%; padding: 20px; }
+        header { text-align: center; margin-bottom: 30px; }
+        .bot-title { font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, #00ff88, #00b4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 4px; }
+        .bot-version { color: #888; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; }
+        .status-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 25px; backdrop-filter: blur(10px); margin-bottom: 30px; }
+        .status-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .status-row:last-child { border-bottom: none; }
+        .status-label { font-weight: 600; color: #aaa; font-size: 0.9rem; }
+        .status-value { font-weight: 700; }
+        .online { color: #00ff88; }
+        .offline { color: #ff4444; }
+        .pairing-section { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px); margin-bottom: 30px; }
+        .pairing-section h2 { text-align: center; margin-bottom: 10px; }
+        .instruction { text-align: center; color: #888; margin-bottom: 20px; }
+        .input-group { display: flex; gap: 10px; margin-bottom: 15px; }
+        select, input { padding: 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; color: white; font-size: 1rem; }
+        select { width: 180px; }
+        input { flex: 1; }
+        button { width: 100%; padding: 16px; background: linear-gradient(135deg, #00ff88, #00b4ff); border: none; border-radius: 10px; color: #0a0a1a; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,255,136,0.3); }
+        .hidden { display: none !important; }
+        #result { margin-top: 15px; padding: 20px; border-radius: 10px; background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); text-align: center; }
+        .code { font-size: 2.5rem; font-weight: 900; color: #00ff88; letter-spacing: 8px; margin: 15px 0; }
+        .spinner { width: 40px; height: 40px; border: 3px solid rgba(0,255,136,0.2); border-top: 3px solid #00ff88; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 15px auto; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .instructions { margin-top: 30px; padding: 20px; background: rgba(0,180,255,0.05); border-radius: 12px; }
+        .instructions h3 { margin-bottom: 15px; }
+        .instructions ol { padding-left: 20px; }
+        .instructions li { margin: 10px 0; color: #bbb; }
+        .features { margin-bottom: 30px; }
+        .features h2 { text-align: center; margin-bottom: 20px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+        .feature-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 15px 10px; text-align: center; font-size: 0.85rem; }
+        .faq { margin-bottom: 30px; }
+        .faq h2 { text-align: center; margin-bottom: 20px; }
+        .faq-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 15px 20px; margin-bottom: 10px; }
+        .faq-item strong { color: #00ff88; }
+        .faq-item p { margin: 5px 0; color: #bbb; }
+        footer { text-align: center; padding: 20px; color: #666; }
+        footer a { color: #00ff88; text-decoration: none; }
+        @media (max-width: 600px) { .bot-title { font-size: 2.2rem; } .input-group { flex-direction: column; } select { width: 100%; } .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1 class="bot-title">KRISHU BOT</h1>
+        <p class="bot-version">BEST MINI BOT // v2.0</p>
+    </header>
+    
+    <div class="status-card">
+        <div class="status-row"><span class="status-label">⚡ Server</span><span class="status-value" id="serverName">Loading...</span></div>
+        <div class="status-row"><span class="status-label">🔄 SYSTEM</span><span class="status-value" id="systemStatus">CONNECTING</span></div>
+        <div class="status-row"><span class="status-label">👥 ACTIVE USERS</span><span class="status-value" id="activeUsers">-- ONLINE</span></div>
+        <div class="status-row"><span class="status-label">🔒 SECURITY</span><span class="status-value">ENCRYPTED</span></div>
+        <div class="status-row"><span class="status-label">🎯 AUTO‑SELECTED</span><span class="status-value">Server 4</span></div>
+    </div>
+    
+    <div class="pairing-section">
+        <h2>🔗 Link Your WhatsApp</h2>
+        <p class="instruction">Enter phone number with country code</p>
+        <div class="input-group">
+            <select id="countryCode">
+                <option value="91">🇮🇳 +91 (India)</option>
+                <option value="92">🇵🇰 +92 (Pakistan)</option>
+                <option value="1">🇺🇸 +1 (USA)</option>
+                <option value="44">🇬🇧 +44 (UK)</option>
+                <option value="880">🇧🇩 +880 (Bangladesh)</option>
+                <option value="971">🇦🇪 +971 (UAE)</option>
+                <option value="966">🇸🇦 +966 (Saudi Arabia)</option>
+                <option value="60">🇲🇾 +60 (Malaysia)</option>
+                <option value="65">🇸🇬 +65 (Singapore)</option>
+                <option value="62">🇮🇩 +62 (Indonesia)</option>
+            </select>
+            <input type="text" id="phoneNumber" placeholder="Enter number (e.g. 9876543210)" maxlength="15">
+        </div>
+        <button onclick="generatePairingCode()">🔗 Generate Pairing Code</button>
+        <div id="loading" class="hidden"><div class="spinner"></div><p>Generating code...</p></div>
+        <div id="result" class="hidden"></div>
+        <div class="instructions">
+            <h3>📖 How to Connect:</h3>
+            <ol>
+                <li>Enter your phone number with country code</li>
+                <li>Click "Generate Pairing Code"</li>
+                <li>Open WhatsApp on your phone</li>
+                <li>Go to <strong>Settings → Linked Devices → Link a Device</strong></li>
+                <li>Enter the 8-digit code shown here</li>
+                <li>Bot is now connected! ✅</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="features">
+        <h2>🚀 Features</h2>
+        <div class="feature-grid">
+            <div class="feature-item">📥 Media Downloader</div>
+            <div class="feature-item">🤖 AI Chat</div>
+            <div class="feature-item">🎨 Sticker Maker</div>
+            <div class="feature-item">👥 Group Tools</div>
+            <div class="feature-item">📖 Quran/Hadith</div>
+            <div class="feature-item">🎮 Fun Games</div>
+            <div class="feature-item">🔍 YouTube Search</div>
+            <div class="feature-item">🌤 Weather Info</div>
+            <div class="feature-item">🎵 Lyrics Finder</div>
+            <div class="feature-item">📰 News Updates</div>
+        </div>
+    </div>
+    
+    <div class="faq">
+        <h2>❓ FAQ</h2>
+        <div class="faq-item"><p><strong>Q: Fake numbers pe chalega?</strong></p><p>A: Haan! Fake number + real number dono pe chalega. Bas linked device karna hoga WhatsApp me.</p></div>
+        <div class="faq-item"><p><strong>Q: Koi OTP/code verify karna hoga?</strong></p><p>A: Nahi. Direct pairing code se link hota hai. Koi OTP nahi.</p></div>
+        <div class="faq-item"><p><strong>Q: 24/7 chalega free?</strong></p><p>A: Haan! Render.com free plan 24/7. Bas 14 min me ping karo cron-job se.</p></div>
+        <div class="faq-item"><p><strong>Q: Mobile se deploy ho sakta hai?</strong></p><p>A: Haan! Pura process mobile browser se ho sakta hai. Koi PC nahi chahiye.</p></div>
+        <div class="faq-item"><p><strong>Q: Kitne commands hain?</strong></p><p>A: 500+ commands! Sab working hai. Type .menu to see all.</p></div>
+    </div>
+    
+    <footer>
+        <p>👑 <a href="#">Krishu</a> // POWERFULL MINI BOT</p>
+        <p class="footer-note">⚡ Free 24/7 | 500+ Commands | krishu.bot.2026@gmail.com</p>
+    </footer>
+</div>
+<script>
+const API_BASE = '';
+async function generatePairingCode() {
+    const phoneInput = document.getElementById('phoneNumber');
+    const countryCode = document.getElementById('countryCode').value;
+    const phone = phoneInput.value.replace(/[^0-9]/g, '');
+    if (!phone || phone.length < 7) { showResult('❌ Valid number required', 'error'); return; }
+    const fullNumber = countryCode + phone;
+    document.getElementById('loading').classList.remove('hidden');
+    document.getElementById('result').classList.add('hidden');
+    try {
+        const res = await fetch(`${API_BASE}/api/pair`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone: fullNumber }) });
+        const data = await res.json();
+        document.getElementById('loading').classList.add('hidden');
+        if (data.success && data.code) {
+            showResult(`✅ <span style="color:#00ff88">Pairing Code Generated!</span><br><br><div class="code">${data.code}</div><br><div style="font-size:0.9rem;color:#bbb;">📱 Open WhatsApp → Settings → Linked Devices → Link a Device → Enter code</div>`, 'success');
+        } else {
+            showResult(`⏳ ${data.message || 'Wait...'}`, '');
+        }
+    } catch(e) {
+        document.getElementById('loading').classList.add('hidden');
+        showResult('❌ Connection error.', 'error');
+    }
+}
+function showResult(html, type) {
+    const result = document.getElementById('result');
+    result.innerHTML = html;
+    result.classList.remove('hidden');
+}
+async function refreshStatus() {
+    try {
+        const res = await fetch(`${API_BASE}/api/status`);
+        const data = await res.json();
+        document.getElementById('serverName').textContent = data.serverName || 'Server 4';
+        document.getElementById('systemStatus').textContent = data.online ? 'ONLINE' : 'OFFLINE';
+        document.getElementById('systemStatus').className = 'status-value ' + (data.online ? 'online' : 'offline');
+        document.getElementById('activeUsers').textContent = (data.activeUsers || 0) + ' ONLINE';
+    } catch(e) {}
+}
+refreshStatus(); setInterval(refreshStatus, 10000);
+document.getElementById('phoneNumber').addEventListener('keypress', function(e) { if (e.key === 'Enter') generatePairingCode(); });
+</script>
+</body>
+      </html>
